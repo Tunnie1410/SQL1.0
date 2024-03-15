@@ -1,3 +1,6 @@
+create database quan_ly_nha_sach
+use quan_ly_nha_sach
+go
 -- Tạo bảng Sách
 CREATE TABLE nha_xuat_ban (
     ma_nha_xuat_ban INT PRIMARY KEY IDENTITY(1,1),
