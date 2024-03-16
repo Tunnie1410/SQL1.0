@@ -1,0 +1,120 @@
+--TẠO VÀ SỬ DỤNG DATABSAE
+CREATE DATABASE QLSVQS
+GO
+
+USE QLSVQS
+
+--TẠO CÁC BẢNG
+CREATE TABLE KHOADAOTAO(
+MAKHOA VARCHAR(10) PRIMARY KEY,
+TENKHOA NVARCHAR(50),
+TGBD DATE,
+TGKT DATE,
+NDDT NVARCHAR(200)
+)
+GO
+
+CREATE TABLE DONVI(
+MADV VARCHAR(10) PRIMARY KEY,
+TENDV NVARCHAR(100),
+DIACHI NVARCHAR(100),
+SDT VARCHAR(11)
+)
+GO
+
+CREATE TABLE LOPQS(
+MALOP VARCHAR(10) PRIMARY KEY,
+MADV VARCHAR(10) FOREIGN KEY REFERENCES DONVI(MADV),
+TENLOP NVARCHAR(10),
+GVCN NVARCHAR(30)
+)
+GO
+CREATE TABLE SINHVIEN(
+MASV VARCHAR(10) PRIMARY KEY,
+TENSV NVARCHAR(30),
+LHC VARCHAR(10),
+NS DATE,
+GT NVARCHAR(3),
+SDT VARCHAR(11),
+EMAIL VARCHAR(50),
+TTSK NVARCHAR(50),
+MAKH VARCHAR(10) FOREIGN KEY REFERENCES KHOADAOTAO(MAKHOA),
+MALQS VARCHAR(10) FOREIGN KEY REFERENCES LOPQS(MALOP)
+)
+GO
+
+CREATE TABLE KETQUA(
+MABKQ VARCHAR(10) PRIMARY KEY,
+MASV VARCHAR(10) FOREIGN KEY REFERENCES SINHVIEN(MASV),
+DRL INT,
+DHT FLOAT,
+KHENTHUONG NVARCHAR(30),
+KYLUAT NVARCHAR(30)
+)
+GO
+--CHÈN DỮ LIỆU VÀO CÁC BẢNG
+INSERT INTO DONVI VALUES
+('QGHN',N'Trung tâm giáo dục Quốc phòng và An ninh, Đại học Quốc gia Hà Nội', N'Thôn 7, xã Thạch Hòa, huyện Thạch Thất, Hà Nội','02435589544'),
+('HANA',N'Khu quân sự Hà Nam', N'Xã Phụng Châu, Chương Mỹ, Hà Nội.','0972352486'),
+('QK2',N'Trung tâm Giáo dục quốc phòng- an ninh Trường quân sự Quân khu 2', N'Khu HC 15, Phường Liên Bảo, Thành phố Vĩnh Yên, Vĩnh Phúc','0211386011')
+
+INSERT INTO KHOADAOTAO VALUES
+('346_QS-102','K56','4-4-2024','4-18-2024',N'Đường lối quốc phòng và an ninh của Đảng Cộng sản Việt Nam, Công tác quốc phòng và an ninh, Quân sự chung, Kỹ thuật chiến đấu bộ binh và chiến thuật'),
+('346_QS-103','K57','4-19-2024','4-6-2024',N'Đường lối quốc phòng và an ninh của Đảng Cộng sản Việt Nam, Công tác quốc phòng và an ninh, Quân sự chung, Kỹ thuật chiến đấu bộ binh và chiến thuật'),
+('346_QS-104','K58','5-7-2024','5-21-2024',N'Đường lối quốc phòng và an ninh của Đảng Cộng sản Việt Nam, Công tác quốc phòng và an ninh, Quân sự chung, Kỹ thuật chiến đấu bộ binh và chiến thuật'),
+('346_QS-105','K59','5-22-2024','6-5-2024',N'Đường lối quốc phòng và an ninh của Đảng Cộng sản Việt Nam, Công tác quốc phòng và an ninh, Quân sự chung, Kỹ thuật chiến đấu bộ binh và chiến thuật')
+
+INSERT INTO LOPQS VALUES
+('678_NVT-1','QGHN','A1',N'Nguyễn Ngọc Vân'),
+('678_NVT-2','QGHN','A2',N'Nguyễn Quang Đại'),
+('678_NVT-3','QGHN','A3',N'Đào Văn Chiểu'),
+('678_NVT-4','QK2','A4',N'Lê Kim Trọng'),
+('678_NVT-5','QK2','A5',N'Nguyễn Tấn Hùng'),
+('678_NVT-6','QK2','A6',N'Huỳnh Công Pháp'),
+('678_NVT-7','HANA','A7',N' Hồ Tấn Sáng')
+
+INSERT INTO SINHVIEN VALUES
+('23D190001',N'Lê Việt Anh ','K59S1 ','3-1-2005',N'Nam','0426285487',' levietanh@gmail.com',N'tốt','346_QS-105','678_NVT-1'),
+('23D190002',N'Võ Thế Anh ','K59S1 ','10-1-2005',N'Nam ','0426285488',' votheanh@gmail.com',N'tốt','346_QS-105','678_NVT-1'),
+('23D190003',N'Nguyễn Thị Lan Ánh ','K59S1 ','1-15-2005',N'Nữ','0426285489',' nguyenlananh@gmail.com',N'tốt','346_QS-103','678_NVT-3'),
+('23D190004',N'Đào Linh Chi','K59S1 ','9-5-2005',N'Nữ','0426285490',' daolinhchi@gmail.com',N'tốt','346_QS-103','678_NVT-2'),
+('23D190005',N'Đỗ Thùy Dung','K59S1 ','9-5-2007',N'Nữ','0426285491',' dothuydung@gmail.com',N'tốt','346_QS-104','678_NVT-1'),
+('23D190006',N'Ngô Anh Duy','K59S1 ','11-17-2005',N'Nam','0426285492',' ngoanhduy@gmail.com',N'tốt','346_QS-102','678_NVT-6'),
+('23D190007',N'Nguyễn Vũ Tiến Dũng ','K59S1 ','4-6-2005',N'Nam','0426285493',' nguyenvutiendung@gmail.com',N'yếu','346_QS-102','678_NVT-7'),
+('23D190008',N'Kiều Quốc Đạt','K59S1 ','1-11-2005',N'Nam','0426285494',' kieuquocdat@gmail.com',N'tốt','346_QS-104','678_NVT-6'),
+('23D190009',N'Nguyễn Ngọc Đạt','K59S1 ','6-14-2005',N'Nam','0426285495',' nguyenngocdat@gmail.com',N'tốt','346_QS-104','678_NVT-6'),
+('23D190010',N'Ninh Duy Anh Đức ','K59S1 ','5-16-2005',N'Nam','0426285496',' ninhduyanhduc@gmail.com',N'tốt','346_QS-102','678_NVT-4'),
+('23D190011',N'Nguyễn Thị Giang','K59S1 ','5-3-2005',N'Nữ','0426285497',' nguythigiang@gmail.com',N'tốt','346_QS-102','678_NVT-4'),
+('23D190012',N'Nguyễn Thúy Hạnh','K59S1 ','6-20-2005',N'Nữ','0426285498',' nguyenthuyhanh@gmail.com',N'tốt','346_QS-103','678_NVT-5'),
+('23D190013',N'Nguyễn Thị Hậu ','K59S1 ','3-11-2005',N'Nữ','0426285499',' nguyenthihau@gmail.com',N'tốt','346_QS-103','678_NVT-3'),
+('23D190014',N'Nguyễn Thúy Hiền','K59S1 ','9-14-2005',N'Nữ','0426285500',' nguyenthuyhien@gmail.com',N'yếu','346_QS-103','678_NVT-7'),
+('23D190015',N'Trần Trung Hiếu','K59S1 ','5-29-2005',N'Nam','0426285501',' trantrunghieu@gmail.com',N'tốt','346_QS-105','678_NVT-6'),
+('23D190016',N'Nguyễn Thị Huế','K59S1 ','8-8-2005',N'Nữ','0426285502','nguyethihue@gmail.com',N'tốt','346_QS-105','678_NVT-5'),
+('23D190017',N'Lê Hồng Huy','K59S1 ','11-21-2005',N'Nam','0426285503',' lehonghuy@gmail.com',N'tốt','346_QS-104','678_NVT-5'),
+('23D190018',N'Trần Quốc Huy','K59S1 ','12-10-2005',N'Nam','0426285504',' tranquochuy@gmail.com',N'tốt','346_QS-102','678_NVT-3'),
+('23D190019',N'Lê Khánh Huyền ','K59S1 ','7-30-2005',N'Nữ','0426285505','lekhanhhuyen@gmail.com',N'tốt','346_QS-103','678_NVT-4'),
+('23D190020',N'Nguyễn Thị Nhung Huyền ','K59S1 ','2-10-2005',N'Nữ','0426285506',' nguyenthinhunghuyen@gmail.com',N'tốt','346_QS-105','678_NVT-2')
+
+INSERT INTO KETQUA VALUES
+('231_SQL-01','23D190001',100,9,N'hoàn thành xuất sắc',NULL),
+('231_SQL-02','23D190002',100,8,NULL,NULL),
+('231_SQL-03','23D190003',100,9.5,N'hoàn thành xuất sắc',NULL),
+('231_SQL-04','23D190004',97,7,NULL,N'cảnh cáo'),
+('231_SQL-05','23D190005',100,8,NULL,NULL),
+('231_SQL-06','23D190006',100,9,N'hoàn thành xuất sắc',NULL),
+('231_SQL-07','23D190007',100,7.5,NULL,NULL),
+('231_SQL-08','23D190008',100,9,N'hoàn thành xuất sắc',NULL),
+('231_SQL-09','23D190009',100,9,N'hoàn thành xuất sắc',NULL),
+('231_SQL-10','23D190010',100,7.5,NULL,NULL),
+('231_SQL-11','23D190011',100,9,N'hoàn thành xuất sắc',NULL),
+('231_SQL-12','23D190012',100,8,NULL,NULL),
+('231_SQL-13','23D190013',89,9.5,N'hoàn thành xuất sắc',NULL),
+('231_SQL-14','23D190014',94,9,N'hoàn thành xuất sắc',NULL),
+('231_SQL-15','23D190015',80,8,NULL,NULL),
+('231_SQL-16','23D190016',95,7,NULL,NULL),
+('231_SQL-17','23D190017',70,7,NULL,NULL),
+('231_SQL-18','23D190018',78,7.5,NULL,NULL),
+('231_SQL-19','23D190019',68,7,NULL,NULL),
+('231_SQL-20','23D190020',99,9,N'hoàn thành xuất sắc',NULL)
+
+
